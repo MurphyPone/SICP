@@ -7,12 +7,12 @@ const sqrtIter = (guess: number, x: number): number => {
   return conditional(
     isGoodEnough(guess, x),
     guess,
-    sqrtIter(improve(guess, x), x),
+    () => sqrtIter(improve(guess, x), x),
   );
 };
 
-const conditional = (predicate: boolean, then_clause: number, else_clause: number) => {
-  return predicate ? then_clause : else_clause;
+const conditional = (predicate: boolean, then_clause: number, else_clause: () => number) => {
+  return predicate ? then_clause : else_clause();
 };
 
 const isGoodEnough = (
